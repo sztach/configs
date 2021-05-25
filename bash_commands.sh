@@ -1,5 +1,11 @@
+# in order to execute this file type in terminal:
+# wget -O - https://raw.githubusercontent.com/sztach/configs/master/bash_commands.sh | bash
+
+
+# install tmux and download tmux configuration file
 apt-get install -y tmux
-# todo copying .tmux.conf to vm
+curl -fLo "./.tmux.conf" https://raw.githubusercontent.com/sztach/configs/master/.tmux.conf
+mv .tmux.conf ~/.tmux.conf
 
 # install neo vim
 # curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
@@ -12,10 +18,15 @@ apt-get install -y tmux
 # sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
 #        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
-# vim-plug for pure vim
+# install vim-plug for pure vim
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-# todo copying .vimrc to vm
-
+# download .vimrc file and install desired plugins
+curl -fLo "./.vimrc" https://raw.githubusercontent.com/sztach/configs/master/.vimrc
+mv .vimrc ~/.vimrc
 vim -c "PlugInstall"
+
+# download .bashrc addons
+wget -O - https://raw.githubusercontent.com/sztach/configs/master/bashrc_addons >> ~/.bashrc
+

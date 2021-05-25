@@ -78,7 +78,7 @@ call plug#begin()
 Plug 'benmills/vimux'
 Plug 'greghor/vim-pyShell'
 "Plug 'julienr/vim-cellmode'
-"Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim'
 Plug 'jpalardy/vim-slime'
 Plug 'ervandew/supertab'
 
