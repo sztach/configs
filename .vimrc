@@ -29,20 +29,18 @@ nnoremap < <C-W><
 nnoremap > <C-W>>
 
 "move between windows easier
-nnoremap <C-h> <C-W>h
-nnoremap <C-j> <C-W>j
-nnoremap <C-k> <C-W>k
-nnoremap <C-l> <C-W>l
+nnoremap <leader>h <C-W>h
+nnoremap <leader>j <C-W>j
+nnoremap <leader>k <C-W>k
+nnoremap <leader>l <C-W>l
 
 let mapleader="\<Space>"
 
 " mappings for moving faster
-noremap <leader>h :bp<CR>
-noremap <leader>l :bn<CR>
-noremap H 50j
+noremap H :bp<CR>
 noremap J 20j
 noremap K 20k
-noremap L 50k
+noremap L :bn<CR>
 noremap - $
 
 " mapping to preserve default HJKL shorcuts
@@ -63,10 +61,13 @@ nnoremap <leader><leader>load :call PyShellSendKey("%load_ext autoreload")<cr>:s
 nnoremap <leader><leader>start :call StartPyShell()<cr>
 nnoremap <leader><leader>starte :call PyShellSendKey("jupyter console --existing")<cr>
 nnoremap <leader><leader>stop :call StopPyShell()<cr>
-noremap <leader>f :call PyShellSendLine()<cr>j
-map <leader>x  <C-c><C-c><leader>avipvvj
+
+noremap <C-j> :call PyShellSendLine()<cr>j
+noremap <C-l> :call PyShellSendKey("")<cr>
+map <C-k> <C-c><C-c><C-l>vipvvj
+map <C-h> vip<C-j>
+" todo add ability to run chunks in code
 map <leader>X ?# %%<cr>Vn<leader>x
-noremap <leader>a :call PyShellSendKey("")<cr>
 
 
 " some handy stuff for working with spark
@@ -89,5 +90,5 @@ let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": get(split($TMUX, ","), 0), "target_pane": ":.1"}
 let g:slime_dont_ask_default = 1
 let g:SuperTabDefaultCompletionType = "<c-n>"
-"let g:jedi#popup_on_dot = 0
-"let g:jedi#documentation_command = "<leader>U"
+let g:jedi#popup_on_dot = 0
+let g:jedi#documentation_command = "<leader>U"

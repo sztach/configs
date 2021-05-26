@@ -32,7 +32,7 @@ curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 sudo apt-get update
 sudo apt-get install gcsfuse
 mkdir bucket
-gcsfuse js_advengers ./bucket
+gcsfuse cvm_boosters ./bucket
 
 # download .vimrc file and install desired plugins
 curl -fLo "./.vimrc" https://raw.githubusercontent.com/sztach/configs/master/.vimrc
