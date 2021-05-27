@@ -6,6 +6,15 @@ filetype plugin indent on
 syntax on
 
 
+"testing
+"set tabstop=4
+"set textwidth=79
+"set autoindent
+"set smartindent
+"set fileformat=unix
+
+let python_highlight_all=1
+
 set number relativenumber
 set hlsearch
 set incsearch
@@ -82,6 +91,9 @@ Plug 'greghor/vim-pyShell'
 Plug 'davidhalter/jedi-vim'
 Plug 'jpalardy/vim-slime'
 Plug 'ervandew/supertab'
+Plug 'vim-syntastic/syntastic'
+Plug 'nvie/vim-flake8'
+Plug 'morhetz/gruvbox'
 
 call plug#end()
 
@@ -92,3 +104,13 @@ let g:slime_dont_ask_default = 1
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:jedi#popup_on_dot = 0
 let g:jedi#documentation_command = "<leader>U"
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+nnoremap <leader>se :call SyntasticReset()<cr>
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
