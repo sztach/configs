@@ -26,6 +26,7 @@ set expandtab
 set nowrapscan
 set hidden
 set backspace=indent,eol,start
+colorscheme elflord
 
 set scrolloff=10
 set shiftwidth=4
@@ -52,11 +53,20 @@ noremap K 20k
 noremap L :bn<CR>
 noremap - $
 
+" move vim panes easier
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
 " mapping to preserve default HJKL shorcuts
 nnoremap <leader>H H
 nnoremap <leader>J J
 nnoremap <leader>K K
 nnoremap <leader>L L
+
+" easier copying
+nnoremap <leader>z :set nu! rnu! paste!<cr>
 
 " delete unsued buffers easliy
 nnoremap <leader>bd :bp<cr>:bd #<cr>
@@ -71,23 +81,21 @@ nnoremap <leader><leader>start :call StartPyShell()<cr>
 nnoremap <leader><leader>starte :call PyShellSendKey("jupyter console --existing")<cr>
 nnoremap <leader><leader>stop :call StopPyShell()<cr>
 
-noremap <C-j> :call PyShellSendLine()<cr>j
-noremap <C-l> :call PyShellSendKey("")<cr>
-map <C-k> <C-c><C-c><C-l>vipvvj
-map <C-h> vip<C-j>
+nnoremap <C-i> :call PyShellSendLine()<cr>j
+map <C-u> vip<C-c><C-c>:call PyShellSendKey("")<cr>vipvvj
+nmap <leader>ral ggVG<C-c><C-c>
+nmap <leader>rup Vgg<C-c><C-c>
 " todo add ability to run chunks in code
-map <leader>X ?# %%<cr>Vn<leader>x
-
 
 " some handy stuff for working with spark
 nnoremap <leader>pd o<Space>.limit(1000).toPandas()<ESC>
 nnoremap <leader>tr oset_trace()<ESC>k
+nnoremap <leader>sh yiw:call PyShellSendKey("<C-r>"")<cr>
 
 call plug#begin()
 
 Plug 'benmills/vimux'
 Plug 'greghor/vim-pyShell'
-"Plug 'julienr/vim-cellmode'
 Plug 'davidhalter/jedi-vim'
 Plug 'jpalardy/vim-slime'
 Plug 'ervandew/supertab'
@@ -105,12 +113,26 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:jedi#popup_on_dot = 0
 let g:jedi#documentation_command = "<leader>U"
 
+"set up linter and code formatter
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-nnoremap <leader>se :call SyntasticReset()<cr>
+nnoremap <leader>sr :call SyntasticReset()<cr>
+nnoremap <leader>swq :w<cr>:call SyntasticCheck()<cr>
+nnoremap <leader>sq :call SyntasticCheck()<cr>
+nnoremap <leader>bl :!black %<cr>:e<cr>
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_mode_map = {
+        \ "mode": "passive",
+        \ "active_filetypes": [],
+        \ "passive_filetypes": [] }
+
+let g:syntastic_quiet_messages = {
+        \ "!level":  "errors",
+       \ "regex":   'E501'}

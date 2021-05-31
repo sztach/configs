@@ -35,6 +35,10 @@ sudo apt-get install gcsfuse
 mkdir bucket
 gcsfuse cvm_boosters ./bucket
 
+# install linter and formatter
+sudo apt-get install -y black
+sudo apt-get install -y flake8
+
 # download .vimrc file and install desired plugins
 curl -fLo "./.vimrc" https://raw.githubusercontent.com/sztach/configs/master/.vimrc
 vim -c "PlugInstall"
