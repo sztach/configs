@@ -81,10 +81,11 @@ nnoremap <leader><leader>start :call StartPyShell()<cr>
 nnoremap <leader><leader>starte :call PyShellSendKey("jupyter console --existing")<cr>
 nnoremap <leader><leader>stop :call StopPyShell()<cr>
 
-nnoremap <C-i> :call PyShellSendLine()<cr>j
-map <C-u> vip<C-c><C-c>:call PyShellSendKey("")<cr>vipvvj
-nmap <leader>ral ggVG<C-c><C-c>
-nmap <leader>rup Vgg<C-c><C-c>
+noremap <C-i> :call PyShellSendLine()<cr>j
+nmap <C-u> vip:w! ~/.paste.py<cr>:call PyShellSendKey("%load -y ~/.paste.py")<cr>:call PyShellSendKey("")<cr>vipvvj
+vmap <C-u> :w! ~/.paste.py<cr>:call PyShellSendKey("%load -y ~/.paste.py")<cr>:call PyShellSendKey("")<cr>
+nmap <leader>ral ggVG<C-i><cr>:call PyShellSendKey("")<cr>
+nmap <leader>rup Vgg<C-i><cr>:call PyShellSendKey("")<cr>
 " todo add ability to run chunks in code
 
 " some handy stuff for working with spark
@@ -106,6 +107,7 @@ Plug 'morhetz/gruvbox'
 call plug#end()
 
 let g:cellmode_cell_delimiter='#%%'
+let g:slime_python_ipython = 1
 let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": get(split($TMUX, ","), 0), "target_pane": ":.1"}
 let g:slime_dont_ask_default = 1
