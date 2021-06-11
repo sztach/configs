@@ -83,15 +83,15 @@ nnoremap <leader><leader>stop :call StopPyShell()<cr>
 
 noremap <C-i> :call PyShellSendLine()<cr>j
 nmap <C-u> vip:w! ~/.paste.py<cr>:call PyShellSendKey("%load -y ~/.paste.py")<cr>:call PyShellSendKey("")<cr>vipvvj
-vmap <C-u> :w! ~/.paste.py<cr>:call PyShellSendKey("%load -y ~/.paste.py")<cr>:call PyShellSendKey("")<cr>
+vmap <C-u> :w! ~/.paste.py<cr>:call PyShellSendKey("%load -y ~/.paste.py")<cr>:call PyShellSendKey("")<cr>'>
 nmap <leader>ral ggVG<C-i><cr>:call PyShellSendKey("")<cr>
-nmap <leader>rup Vgg<C-i><cr>:call PyShellSendKey("")<cr>
+nmap <leader>rup Vgg<C-u>
 " todo add ability to run chunks in code
 
 " some handy stuff for working with spark
 nnoremap <leader>pd o<Space>.limit(1000).toPandas()<ESC>
 nnoremap <leader>tr oset_trace()<ESC>k
-nnoremap <leader>sh yiw:call PyShellSendKey("<C-r>"")<cr>
+nnoremap <leader>sh yiw:call PyShellSendKey("<C-r>"")<left><left>
 
 call plug#begin()
 
