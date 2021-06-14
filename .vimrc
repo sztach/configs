@@ -53,7 +53,7 @@ noremap K 20k
 noremap L :bn<CR>
 noremap - $
 
-" move vim panes easier
+" move between vim panes easier
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -67,6 +67,7 @@ nnoremap <leader>L L
 
 " easier copying
 nnoremap <leader>z :set nu! rnu! paste!<cr>
+nnoremap Y v$y
 
 " delete unsued buffers easliy
 nnoremap <leader>bd :bp<cr>:bd #<cr>
