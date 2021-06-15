@@ -60,10 +60,10 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " mapping to preserve default HJKL shorcuts
-nnoremap <leader>H H
-nnoremap <leader>J J
-nnoremap <leader>K K
-nnoremap <leader>L L
+noremap <leader>H H
+noremap <leader>J J
+noremap <leader>K K
+noremap <leader>L L
 
 " easier copying
 nnoremap <leader>z :set nu! rnu! paste!<cr>
@@ -76,7 +76,7 @@ nnoremap <leader>bdq :bp<cr>:bd! #<cr>
 " source changes from .vimrc easier
 nnoremap <leader><leader>source :source ~/.vimrc<cr>
 
-" options to send code lines to ipython console
+" options to send code lines to jupyter console
 nnoremap <leader><leader>load :call PyShellSendKey("%load_ext autoreload")<cr>:sleep 1<cr>:call PyShellSendKey("%autoreload 2")<cr>
 nnoremap <leader><leader>start :call StartPyShell()<cr>
 nnoremap <leader><leader>starte :call PyShellSendKey("jupyter console --existing")<cr>
@@ -85,14 +85,21 @@ nnoremap <leader><leader>stop :call StopPyShell()<cr>
 noremap <C-i> :call PyShellSendLine()<cr>j
 nmap <C-u> vip:w! ~/.paste.py<cr>:call PyShellSendKey("%load -y ~/.paste.py")<cr>:call PyShellSendKey("")<cr>vipvvj
 vmap <C-u> :w! ~/.paste.py<cr>:call PyShellSendKey("%load -y ~/.paste.py")<cr>:call PyShellSendKey("")<cr>'>
-nmap <leader>ral ggVG<C-i><cr>:call PyShellSendKey("")<cr>
+nmap <leader>ral ggVG<C-u>
 nmap <leader>rup Vgg<C-u>
-" todo add ability to run chunks in code
+nmap <leader>rdo VG<C-u>
+nmap <leader>rbl ?#$%<cr>VN<C-u>
+nmap <leader>rfu ?def<cr>V/return<cr><C-u>
+vnoremap <leader>i <leader>J:call PyShellSendLine()<cr>u
 
 " some handy stuff for working with spark
-nnoremap <leader>pd o<Space>.limit(1000).toPandas()<ESC>
 nnoremap <leader>tr oset_trace()<ESC>k
+nnoremap <leader>pd yiw:call PyShellSendKey("<C-r>".limit(100).toPandas()")<cr>
+nnoremap <leader>cnt yiw:call PyShellSendKey("<C-r>".count()")<cr>
 nnoremap <leader>sh yiw:call PyShellSendKey("<C-r>"")<left><left>
+
+vnoremap <leader>dbg vv'<O#$%<esc>'>o#$%<esc>k?#$%<cr>VN<
+nnoremap <leader>undbg ?#$%<cr>VN>'<dd'>dd
 
 call plug#begin()
 
@@ -124,7 +131,8 @@ set statusline+=%*
 nnoremap <leader>sr :call SyntasticReset()<cr>
 nnoremap <leader>swq :w<cr>:call SyntasticCheck()<cr>
 nnoremap <leader>sq :call SyntasticCheck()<cr>
-nnoremap <leader>bl :!black %<cr>:e<cr>
+nnoremap <leader>for :!black %<cr>:e<cr>
+
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
@@ -138,4 +146,4 @@ let g:syntastic_mode_map = {
 
 let g:syntastic_quiet_messages = {
         \ "!level":  "errors",
-       \ "regex":   'E501'}
+       \ "regex":   'E501\|E402'}
