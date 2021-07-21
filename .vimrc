@@ -106,6 +106,7 @@ call plug#begin()
 Plug 'benmills/vimux'
 Plug 'greghor/vim-pyShell'
 Plug 'davidhalter/jedi-vim'
+Plug 'easymotion/vim-easymotion'
 Plug 'jpalardy/vim-slime'
 Plug 'ervandew/supertab'
 Plug 'vim-syntastic/syntastic'
@@ -132,7 +133,6 @@ nnoremap <leader>sr :call SyntasticReset()<cr>
 nnoremap <leader>swq :w<cr>:call SyntasticCheck()<cr>
 nnoremap <leader>sq :call SyntasticCheck()<cr>
 nnoremap <leader>for :!black %<cr>:e<cr>
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
