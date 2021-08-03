@@ -1,6 +1,5 @@
 # in order to execute this file type in terminal:
-#todo podmienić
-# wget -O - https://raw.githubusercontent.com/sztach/configs/master/bash_commands.sh | bash
+# wget -O - https://raw.githubusercontent.com/sztach/configs/master/update.sh | bash
 
 cd ~
 current_date=$(date +"%s")

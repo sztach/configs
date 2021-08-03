@@ -53,23 +53,23 @@ noremap K 20k
 noremap L :bn<CR>
 noremap - $
 
-" move between vim panes easier
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
 " mapping to preserve default HJKL shorcuts
 noremap <leader>H H
 noremap <leader>J J
 noremap <leader>K K
 noremap <leader>L L
 
+" move between vim panes easier
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
 " easier copying
 nnoremap <leader>z :set nu! rnu! paste!<cr>
 nnoremap Y v$y
 
-" delete unsued buffers easliy
+" delete unused buffers easliy
 nnoremap <leader>bd :bp<cr>:bd #<cr>
 nnoremap <leader>bdq :bp<cr>:bd! #<cr>
 
@@ -98,8 +98,13 @@ nnoremap <leader>pd yiw:call PyShellSendKey("<C-r>".limit(100).toPandas()")<cr>
 nnoremap <leader>cnt yiw:call PyShellSendKey("<C-r>".count()")<cr>
 nnoremap <leader>sh yiw:call PyShellSendKey("<C-r>"")<left><left>
 
+" debugging with tmux and jupyter console
 vnoremap <leader>dbg vv'<O#$%<esc>'>o#$%<esc>k?#$%<cr>VN<
 nnoremap <leader>undbg ?#$%<cr>VN>'<dd'>dd
+
+" map easymotion shortcuts
+nmap W <leader><leader>w
+nmap B <leader><leader>b
 
 call plug#begin()
 
