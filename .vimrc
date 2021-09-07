@@ -106,9 +106,14 @@ nnoremap <leader>undbg ?#$%<cr>VN>'<dd'>dd
 nmap W <leader><leader>w
 nmap B <leader><leader>b
 
-call plug#begin()
 
-Plug 'benmills/vimux'
+" other
+nnoremap <leader>nh :nohls<cr>
+
+call plug#begin()
+" THe oldest version has some bug that doesn't allow to send code lines to
+" jupyter console
+Plug 'benmills/vimux', {'commit': '37f41195e6369ac602a08ec61364906600b771f1'}
 Plug 'greghor/vim-pyShell'
 Plug 'davidhalter/jedi-vim'
 Plug 'easymotion/vim-easymotion'
