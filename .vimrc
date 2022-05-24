@@ -5,7 +5,6 @@ filetype plugin indent on
 " activates syntax highlighting among other things
 syntax on
 
-
 "testing
 "set tabstop=4
 "set textwidth=79
@@ -26,6 +25,7 @@ set expandtab
 set nowrapscan
 set hidden
 set backspace=indent,eol,start
+set paste
 colorscheme elflord
 
 set scrolloff=10
@@ -66,7 +66,7 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " easier copying
-nnoremap <leader>z :set nu! rnu! paste!<cr>
+nnoremap <leader>z :set nu! rnu!<cr>
 nnoremap Y v$y
 
 " delete unused buffers easliy
@@ -83,6 +83,7 @@ nnoremap <leader><leader>starte :call PyShellSendKey("jupyter console --existing
 nnoremap <leader><leader>stop :call StopPyShell()<cr>
 
 noremap <C-i> :call PyShellSendLine()<cr>j
+" todo remove jupyter console chunks and add ipython console chunks
 nmap <C-u> vip:w! ~/.paste.py<cr>:call PyShellSendKey("%load -y ~/.paste.py")<cr>:call PyShellSendKey("")<cr>vipvvj
 vmap <C-u> :w! ~/.paste.py<cr>:call PyShellSendKey("%load -y ~/.paste.py")<cr>:call PyShellSendKey("")<cr>'>
 nmap <leader>ral ggVG<C-u>
@@ -98,10 +99,6 @@ nnoremap <leader>pd yiw:call PyShellSendKey("<C-r>".limit(100).toPandas()")<cr>
 nnoremap <leader>cnt yiw:call PyShellSendKey("<C-r>".count()")<cr>
 nnoremap <leader>sh yiw:call PyShellSendKey("<C-r>"")<left><left>
 
-" debugging with tmux and jupyter console
-vnoremap <leader>dbg vv'<O#$%<esc>'>o#$%<esc>k?#$%<cr>VN<
-nnoremap <leader>undbg ?#$%<cr>VN>'<dd'>dd
-
 " map easymotion shortcuts
 nmap W <leader><leader>w
 nmap B <leader><leader>b
@@ -111,7 +108,7 @@ nmap B <leader><leader>b
 nnoremap <leader>nh :nohls<cr>
 
 call plug#begin()
-" THe oldest version has some bug that doesn't allow to send code lines to
+" THe newest version has some bug that doesn't allow to send code lines to
 " jupyter console
 Plug 'benmills/vimux', {'commit': '37f41195e6369ac602a08ec61364906600b771f1'}
 Plug 'greghor/vim-pyShell'
