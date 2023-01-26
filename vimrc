@@ -6,15 +6,17 @@ filetype plugin indent on
 " activates syntax highlighting among other things
 syntax on
 
-"perhaps to further consideration
+"cursor is steady block or blinking bar depending on mode
+let &t_EI = "\e[2 q"
+let &t_SI = "\e[5 q"
+
+"perhaps for further consideration
 "set tabstop=4
 "set textwidth=79
 "set autoindent
 "set smartindent
 "set fileformat=unix
 "colorscheme elflord
-
-let python_highlight_all=1
 
 set number relativenumber
 set hlsearch
@@ -110,8 +112,7 @@ nnoremap <leader>sh yiw:call PyShellSendKey("<C-r>"")<left><left>
 
 
 call plug#begin()
-" THe oldest version has some bug that doesn't allow to send code lines to
-" jupyter console
+" Last version has some bug that doesn't allow to send code lines to jupyter console
 Plug 'benmills/vimux', {'commit': '37f41195e6369ac602a08ec61364906600b771f1'}
 Plug 'greghor/vim-pyShell'
 Plug 'davidhalter/jedi-vim'
@@ -126,6 +127,7 @@ call plug#end()
 
 """ python IDE-like settings
 
+let python_highlight_all=1
 let g:cellmode_cell_delimiter='#%%'
 let g:slime_python_ipython = 1
 let g:slime_target = "tmux"
