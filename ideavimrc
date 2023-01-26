@@ -7,8 +7,6 @@ nmap <leader>rdo VG
 nmap <leader>rbl ?#$%<cr>VN
 nmap <leader>rfu ?def<cr>V/return<cr>
 nnoremap <c-i> vip
-" copy to clipboard on MacOS
-vnoremap <leader>cp :w! ~/.temp_copy<cr><cr>:!pbcopy < ~/.temp_copy<cr><cr>:!rm ~/.temp_copy<cr><cr>
 "<c-u> - execute selection in python console
 "
 "

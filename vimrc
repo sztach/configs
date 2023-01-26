@@ -1,16 +1,18 @@
-" option-list or options
+""" general
+
 " activates filetype detection
 filetype plugin indent on
 
 " activates syntax highlighting among other things
 syntax on
 
-"testing
+"perhaps to further consideration
 "set tabstop=4
 "set textwidth=79
 "set autoindent
 "set smartindent
 "set fileformat=unix
+"colorscheme elflord
 
 let python_highlight_all=1
 
@@ -24,10 +26,8 @@ set lbr
 set expandtab
 set nowrapscan
 set hidden
-set backspace=indent,eol,start
 set paste
-colorscheme elflord
-
+set backspace=indent,eol,start
 set scrolloff=10
 set shiftwidth=4
 set softtabstop=4
@@ -52,6 +52,7 @@ noremap J 20j
 noremap K 20k
 noremap L :bn<CR>
 noremap - $
+nnoremap , `
 
 " mapping to preserve default HJKL shorcuts
 noremap <leader>H H
@@ -65,25 +66,33 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" easier copying
-nnoremap <leader>z :set nu! rnu!<cr>
-nnoremap Y v$y
-
 " delete unused buffers easliy
 nnoremap <leader>bd :bp<cr>:bd #<cr>
 nnoremap <leader>bdq :bp<cr>:bd! #<cr>
+nnoremap <leader>Q :qall!<cr>
 
 " source changes from .vimrc easier
 nnoremap <leader><leader>source :source ~/.vimrc<cr>
+
+" map easymotion shortcuts
+nmap W <leader><leader>w
+nmap B <leader><leader>b
+
+" selection and yanking
+nnoremap <leader>z :set nu! rnu! paste!<cr>
+nnoremap Y v$y
+nnoremap <leader>nh :nohls<cr>
+vnoremap <leader>cp :w! ~/.temp_copy<cr><cr>:!pbcopy < ~/.temp_copy<cr><cr>:!rm ~/.temp_copy<cr><cr>
+
+""" python
 
 " options to send code lines to jupyter console
 nnoremap <leader><leader>load :call PyShellSendKey("%load_ext autoreload")<cr>:sleep 1<cr>:call PyShellSendKey("%autoreload 2")<cr>
 nnoremap <leader><leader>start :call StartPyShell()<cr>
 nnoremap <leader><leader>starte :call PyShellSendKey("jupyter console --existing")<cr>
 nnoremap <leader><leader>stop :call StopPyShell()<cr>
-
 noremap <C-i> :call PyShellSendLine()<cr>j
-" todo remove jupyter console chunks and add ipython console chunks
+" todo remove jupyter console and add chunks from ipython
 nmap <C-u> vip:w! ~/.paste.py<cr>:call PyShellSendKey("%load -y ~/.paste.py")<cr>:call PyShellSendKey("")<cr>vipvvj
 vmap <C-u> :w! ~/.paste.py<cr>:call PyShellSendKey("%load -y ~/.paste.py")<cr>:call PyShellSendKey("")<cr>'>
 nmap <leader>ral ggVG<C-u>
@@ -99,16 +108,9 @@ nnoremap <leader>pd yiw:call PyShellSendKey("<C-r>".limit(100).toPandas()")<cr>
 nnoremap <leader>cnt yiw:call PyShellSendKey("<C-r>".count()")<cr>
 nnoremap <leader>sh yiw:call PyShellSendKey("<C-r>"")<left><left>
 
-" map easymotion shortcuts
-nmap W <leader><leader>w
-nmap B <leader><leader>b
-
-
-" other
-nnoremap <leader>nh :nohls<cr>
 
 call plug#begin()
-" THe newest version has some bug that doesn't allow to send code lines to
+" THe oldest version has some bug that doesn't allow to send code lines to
 " jupyter console
 Plug 'benmills/vimux', {'commit': '37f41195e6369ac602a08ec61364906600b771f1'}
 Plug 'greghor/vim-pyShell'
@@ -122,6 +124,8 @@ Plug 'morhetz/gruvbox'
 
 call plug#end()
 
+""" python IDE-like settings
+
 let g:cellmode_cell_delimiter='#%%'
 let g:slime_python_ipython = 1
 let g:slime_target = "tmux"
@@ -131,15 +135,15 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:jedi#popup_on_dot = 0
 let g:jedi#documentation_command = "<leader>U"
 
-"set up linter and code formatter
+" set up linter and code formatter
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
 nnoremap <leader>sr :call SyntasticReset()<cr>
 nnoremap <leader>swq :w<cr>:call SyntasticCheck()<cr>
 nnoremap <leader>sq :call SyntasticCheck()<cr>
 nnoremap <leader>for :!black %<cr>:e<cr>
+
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
