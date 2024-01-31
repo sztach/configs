@@ -10,14 +10,6 @@ syntax on
 let &t_EI = "\e[2 q"
 let &t_SI = "\e[5 q"
 
-"perhaps for further consideration
-"set tabstop=4
-"set textwidth=79
-"set autoindent
-"set smartindent
-"set fileformat=unix
-"colorscheme elflord
-
 set number relativenumber
 set hlsearch
 set incsearch
@@ -41,12 +33,15 @@ nnoremap < <C-W><
 nnoremap > <C-W>>
 
 "move between windows easier
+nnoremap <leader>E :Explore<cr>
 nnoremap <leader>h <C-W>h
 nnoremap <leader>j <C-W>j
 nnoremap <leader>k <C-W>k
 nnoremap <leader>l <C-W>l
 
 let mapleader="\<Space>"
+nnoremap <C-o> :NERDTree<cr>
+nnoremap <leader>q :q!<cr>
 
 " mappings for moving faster
 noremap H :bp<CR>
@@ -70,7 +65,7 @@ nnoremap <C-l> <C-w>l
 
 " delete unused buffers easliy
 nnoremap <leader>bd :bp<cr>:bd #<cr>
-nnoremap <leader>bdq :bp<cr>:bd! #<cr>
+nnoremap <leader>q :q!<cr>
 nnoremap <leader>Q :qall!<cr>
 
 " source changes from .vimrc easier
@@ -83,33 +78,9 @@ nmap B <leader><leader>b
 " selection and yanking
 nnoremap <leader>z :set nu! rnu! paste!<cr>
 nnoremap Y v$y
-nnoremap <leader>nh :nohls<cr>
+noremap <leader>nh :nohls<cr>
 vnoremap <leader>cp :w! ~/.temp_copy<cr><cr>:!pbcopy < ~/.temp_copy<cr><cr>:!rm ~/.temp_copy<cr><cr>
-
-""" python
-
-" options to send code lines to jupyter console
-nnoremap <leader><leader>load :call PyShellSendKey("%load_ext autoreload")<cr>:sleep 1<cr>:call PyShellSendKey("%autoreload 2")<cr>
-nnoremap <leader><leader>start :call StartPyShell()<cr>
-nnoremap <leader><leader>starte :call PyShellSendKey("jupyter console --existing")<cr>
-nnoremap <leader><leader>stop :call StopPyShell()<cr>
-noremap <C-i> :call PyShellSendLine()<cr>j
-" todo remove jupyter console and add chunks from ipython
-nmap <C-u> vip:w! ~/.paste.py<cr>:call PyShellSendKey("%load -y ~/.paste.py")<cr>:call PyShellSendKey("")<cr>vipvvj
-vmap <C-u> :w! ~/.paste.py<cr>:call PyShellSendKey("%load -y ~/.paste.py")<cr>:call PyShellSendKey("")<cr>'>
-nmap <leader>ral ggVG<C-u>
-nmap <leader>rup Vgg<C-u>
-nmap <leader>rdo VG<C-u>
-nmap <leader>rbl ?#$%<cr>VN<C-u>
-nmap <leader>rfu ?def<cr>V/return<cr><C-u>
-vnoremap <leader>i <leader>J:call PyShellSendLine()<cr>u
-
-" some handy stuff for working with spark
-nnoremap <leader>tr oset_trace()<ESC>k
-nnoremap <leader>pd yiw:call PyShellSendKey("<C-r>".limit(100).toPandas()")<cr>
-nnoremap <leader>cnt yiw:call PyShellSendKey("<C-r>".count()")<cr>
-nnoremap <leader>sh yiw:call PyShellSendKey("<C-r>"")<left><left>
-
+nnoremap ~ vip
 
 call plug#begin()
 " Last version has some bug that doesn't allow to send code lines to jupyter console
@@ -122,6 +93,7 @@ Plug 'ervandew/supertab'
 Plug 'vim-syntastic/syntastic'
 Plug 'nvie/vim-flake8'
 Plug 'morhetz/gruvbox'
+Plug 'preservim/nerdtree'
 
 call plug#end()
 
