@@ -1,11 +1,7 @@
-""" general
-
 " activates filetype detection
 filetype plugin indent on
-
 " activates syntax highlighting among other things
 syntax on
-
 "cursor is steady block or blinking bar depending on mode
 let &t_EI = "\e[2 q"
 let &t_SI = "\e[5 q"
@@ -26,56 +22,59 @@ set scrolloff=10
 set shiftwidth=4
 set softtabstop=4
 
-" resize windows easier
+let mapleader="\<Space>"
+nnoremap <C-o> :NERDTree<cr>
+nnoremap <leader>E :Explore<cr>
+nnoremap <leader>q :q!<cr>
+
+"resize panes easier
 nnoremap + <C-W>+
 nnoremap _ <C-W>-
 nnoremap < <C-W><
 nnoremap > <C-W>>
 
-"move between windows easier
-nnoremap <leader>E :Explore<cr>
-nnoremap <leader>h <C-W>h
-nnoremap <leader>j <C-W>j
-nnoremap <leader>k <C-W>k
-nnoremap <leader>l <C-W>l
+"move betwwen tabs easier
+noremap <C-h> gT
+noremap <C-l> gt
+nnoremap <C-j> G
+nnoremap <C-k> gg
+"create new tab out of a buffer
+nnoremap <C-t> <C-W>T
 
-let mapleader="\<Space>"
-nnoremap <C-o> :NERDTree<cr>
-nnoremap <leader>q :q!<cr>
-
-" mappings for moving faster
+"mappings for moving faster
 noremap H :bp<CR>
 noremap J 20j
 noremap K 20k
 noremap L :bn<CR>
 noremap - $
 nnoremap , `
-
-" mapping to preserve default HJKL shorcuts
+"preserve default HJKL shorcuts
 noremap <leader>H H
 noremap <leader>J J
 noremap <leader>K K
 noremap <leader>L L
-
-" move between vim panes easier
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-" delete unused buffers easliy
-nnoremap <leader>bd :bp<cr>:bd #<cr>
-nnoremap <leader>q :q!<cr>
-nnoremap <leader>Q :qall!<cr>
-
-" source changes from .vimrc easier
-nnoremap <leader><leader>source :source ~/.vimrc<cr>
-
-" map easymotion shortcuts
+"easymotion shortcuts
 nmap W <leader><leader>w
 nmap B <leader><leader>b
 
-" selection and yanking
+"move between panes easier
+nnoremap <leader>h <C-w>h
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+nnoremap <leader>l <C-w>l
+
+"deletion shortcuts
+"unused buffers
+nnoremap <leader>bd :bp<cr>:bd #<cr>
+nnoremap <leader>bq :bp<cr>:bd! #<cr>
+"windows
+nnoremap <leader>q :q!<cr>
+nnoremap <leader>Q :qall!<cr>
+
+"source changes from .vimrc easier
+nnoremap <leader><leader>source :source ~/.vimrc<cr>
+
+"selection and yanking
 nnoremap <leader>z :set nu! rnu! paste!<cr>
 nnoremap Y v$y
 noremap <leader>nh :nohls<cr>
