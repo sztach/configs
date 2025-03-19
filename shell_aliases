@@ -1,0 +1,15 @@
+alias gau='git add -u'
+alias gcb='git checkout -b '
+alias gcm='git checkout master'
+alias gla='git checkout -'
+alias gco='git checkout'
+alias gcne='git commit --amend --no-edit'
+alias gme='git commit -m '
+alias gd='git diff'
+alias gsl='git log --graph --oneline --decorate'
+alias gpu='git push'
+alias gpl='git pull'
+alias gs='git status'
+
+alias dh='du -hs *'
+
