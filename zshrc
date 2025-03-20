@@ -6,12 +6,29 @@ alias gco='git checkout'
 alias gcne='git commit --amend --no-edit'
 alias gme='git commit -m '
 alias gd='git diff'
-alias gsl='git log --graph --decorate'
+alias gls='git log --graph --decorate'
 alias gpu='git push'
 alias gpl='git pull'
 alias gs='git status'
 
 alias dh='du -hs *'
+
+gmd() {
+  # Extract branch name
+  local branch=$(git rev-parse --abbrev-ref HEAD)
+  
+  # Extract DATA-XXXXX pattern from the branch name
+  local ticket=$(echo "$branch" | grep -o 'DATA-[0-9]\{1,6\}')
+
+  # Ensure a ticket number is found
+  if [[ -n "$ticket" ]]; then
+    git commit -m "$ticket: $*"
+    echo "Committed with massage:"
+    echo "$ticket: $*"
+  else
+    echo "❌ No ticket number found in branch name."
+  fi
+}
 
 
 export PATH="/opt/homebrew/bin:$PATH"
@@ -132,4 +149,3 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
-copied zshrc version: ccbfe1e-2024-05-10T12:19:31+02:00

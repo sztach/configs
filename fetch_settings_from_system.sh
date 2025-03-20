@@ -1,6 +1,8 @@
+VERSION=$(git log -1 --format="%h-%cd" --date=iso-strict)
+
+echo "copying vimrc..."
 cp ~/.vimrc ./vimrc
 
-VERSION=$(git log -1 --format="%h-%cd" --date=iso-strict)
+echo "copying zshrc..."
 cp ~/.zshrc ./zshrc
-echo "copied zshrc version: $VERSION" >> ./zshrc
 
