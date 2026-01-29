@@ -31,12 +31,10 @@ set shiftwidth=4
 set softtabstop=4
 
 
-"""settings for navigation
+"""NERDtree settings for navigation
 nnoremap <C-o> :NERDTree<cr>
 autocmd FileType nerdtree setlocal number relativenumber
 let g:NERDTreeShowBookmarks=1
-"autocmd VimEnter * NERDTree | execute 'normal B'
-"todo: when opening vim without a file, it opens nerdtree, but another empty buffer is created anyway
 autocmd VimEnter * if argc() == 0 | execute 'NERDTree' 
 " open terminal in a directory under a cursor (works only on nerdtree window)
 nmap <leader>ot mp:! open -a iterm <C-r>*<cr><cr>
@@ -45,8 +43,9 @@ nmap <leader>ot mp:! open -a iterm <C-r>*<cr><cr>
 "deletion shortcuts
 "unused buffers
 nnoremap <leader>d :bp<cr>:bd #<cr>
-nnoremap <C-d> :bp<cr>:bd #<cr>
+nmap <C-d> <leader>d
 nnoremap <leader>fd :bp<cr>:bd! #<cr>
+nnoremap <leader>s :w<cr>:bp<cr>:bd! #<cr>
 "windows
 nnoremap <leader>q :q!<cr>
 nnoremap <leader>Q :qall!<cr>
@@ -64,6 +63,7 @@ nnoremap <C-j> G
 nnoremap <C-k> gg
 "create new tab out of a buffer
 nnoremap <C-t> <C-W>T
+nnoremap <leader>T :tab sball<cr>
 
 "mappings for moving faster
 noremap H :bp<CR>
@@ -103,6 +103,7 @@ vnoremap * "my/<C-r>m<cr>
 
 """ send lines to the console with vim-slime
 nmap <C-i> V<C-c><C-c>
+vmap <C-i> <C-c><C-c>
 nmap <C-u> <C-c><C-c>
 nnoremap <leader>ter : belowright terminal <cr><C-w>k:SlimeConfig<cr>
 "noremap <C-i> :call PyShellSendLine()<cr>j

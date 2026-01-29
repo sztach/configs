@@ -13,6 +13,7 @@ alias gs='git status'
 
 alias dh='du -hs *'
 
+
 gmd() {
   # Extract branch name
   local branch=$(git rev-parse --abbrev-ref HEAD)
@@ -37,11 +38,6 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 export PATH="$PATH:/Users/jakubsztachelski/Library/Application Support/Coursier/bin"
-
-export AWS_PROFILE=dst-limited-101222396875
-
-export PYSPARK_DRIVER_PYTHON=jupyter
-export PYSPARK_DRIVER_PYTHON_OPTS='notebook'
 
 
 
