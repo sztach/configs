@@ -14,5 +14,25 @@ alias gdr='git diff "origin/$(git rev-parse --abbrev-ref HEAD)"'
 
 alias dh='du -hs *'
 
-alias cl='claude'
+gmd() {
+  # Extract branch name
+  local branch=$(git rev-parse --abbrev-ref HEAD)
+  
+  # Extract ticket pattern from the branch name
+  local ticket=$(echo "$branch" | grep -oE '^[A-Za-z]+-[0-9]+')
+
+  # Ensure a ticket number is found
+  if [[ -n "$ticket" ]]; then
+    git commit -m "$ticket: $*"
+    echo "Committed with massage:"
+    echo "$ticket: $*"
+  else
+    echo "❌ No ticket number found in branch name."
+  fi
+}
+
+
+alias cl='claude --model opus'
 alias cls='claude --model sonnet'
+
+
